@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.GoodmanagementMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Goodmanagement" >
+    <id column="goodId" property="goodid" jdbcType="INTEGER" />
+    <result column="goodTypeId" property="goodtypeid" jdbcType="INTEGER" />
+    <result column="goodImg" property="goodimg" jdbcType="VARCHAR" />
+    <result column="goodName" property="goodname" jdbcType="VARCHAR" />
+    <result column="goodBarcode" property="goodbarcode" jdbcType="VARCHAR" />
+    <result column="goodSpec" property="goodspec" jdbcType="VARCHAR" />
+    <result column="goodInventory" property="goodinventory" jdbcType="INTEGER" />
+    <result column="goodSalePrice" property="goodsaleprice" jdbcType="DOUBLE" />
+    <result column="goodCost" property="goodcost" jdbcType="DOUBLE" />
+    <result column="synchronization" property="synchronization" jdbcType="INTEGER" />
+    <result column="goodDescribe" property="gooddescribe" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goodId, goodTypeId, goodImg, goodName, goodBarcode, goodSpec, goodInventory, goodSalePrice, 
+    goodCost, synchronization, goodDescribe
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.GoodmanagementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goodmanagement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goodmanagement
+    where goodId = #{goodid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goodmanagement
+    where goodId = #{goodid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.GoodmanagementExample" >
+    delete from goodmanagement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Goodmanagement" >
+    insert into goodmanagement (goodId, goodTypeId, goodImg, 
+      goodName, goodBarcode, goodSpec, 
+      goodInventory, goodSalePrice, goodCost, 
+      synchronization, goodDescribe)
+    values (#{goodid,jdbcType=INTEGER}, #{goodtypeid,jdbcType=INTEGER}, #{goodimg,jdbcType=VARCHAR}, 
+      #{goodname,jdbcType=VARCHAR}, #{goodbarcode,jdbcType=VARCHAR}, #{goodspec,jdbcType=VARCHAR}, 
+      #{goodinventory,jdbcType=INTEGER}, #{goodsaleprice,jdbcType=DOUBLE}, #{goodcost,jdbcType=DOUBLE}, 
+      #{synchronization,jdbcType=INTEGER}, #{gooddescribe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Goodmanagement" >
+    insert into goodmanagement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodid != null" >
+        goodId,
+      </if>
+      <if test="goodtypeid != null" >
+        goodTypeId,
+      </if>
+      <if test="goodimg != null" >
+        goodImg,
+      </if>
+      <if test="goodname != null" >
+        goodName,
+      </if>
+      <if test="goodbarcode != null" >
+        goodBarcode,
+      </if>
+      <if test="goodspec != null" >
+        goodSpec,
+      </if>
+      <if test="goodinventory != null" >
+        goodInventory,
+      </if>
+      <if test="goodsaleprice != null" >
+        goodSalePrice,
+      </if>
+      <if test="goodcost != null" >
+        goodCost,
+      </if>
+      <if test="synchronization != null" >
+        synchronization,
+      </if>
+      <if test="gooddescribe != null" >
+        goodDescribe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodid != null" >
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="goodtypeid != null" >
+        #{goodtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="goodimg != null" >
+        #{goodimg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodname != null" >
+        #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodbarcode != null" >
+        #{goodbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodspec != null" >
+        #{goodspec,jdbcType=VARCHAR},
+      </if>
+      <if test="goodinventory != null" >
+        #{goodinventory,jdbcType=INTEGER},
+      </if>
+      <if test="goodsaleprice != null" >
+        #{goodsaleprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodcost != null" >
+        #{goodcost,jdbcType=DOUBLE},
+      </if>
+      <if test="synchronization != null" >
+        #{synchronization,jdbcType=INTEGER},
+      </if>
+      <if test="gooddescribe != null" >
+        #{gooddescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.GoodmanagementExample" resultType="java.lang.Integer" >
+    select count(*) from goodmanagement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update goodmanagement
+    <set >
+      <if test="record.goodid != null" >
+        goodId = #{record.goodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodtypeid != null" >
+        goodTypeId = #{record.goodtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodimg != null" >
+        goodImg = #{record.goodimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodname != null" >
+        goodName = #{record.goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodbarcode != null" >
+        goodBarcode = #{record.goodbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodspec != null" >
+        goodSpec = #{record.goodspec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodinventory != null" >
+        goodInventory = #{record.goodinventory,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsaleprice != null" >
+        goodSalePrice = #{record.goodsaleprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goodcost != null" >
+        goodCost = #{record.goodcost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.synchronization != null" >
+        synchronization = #{record.synchronization,jdbcType=INTEGER},
+      </if>
+      <if test="record.gooddescribe != null" >
+        goodDescribe = #{record.gooddescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update goodmanagement
+    set goodId = #{record.goodid,jdbcType=INTEGER},
+      goodTypeId = #{record.goodtypeid,jdbcType=INTEGER},
+      goodImg = #{record.goodimg,jdbcType=VARCHAR},
+      goodName = #{record.goodname,jdbcType=VARCHAR},
+      goodBarcode = #{record.goodbarcode,jdbcType=VARCHAR},
+      goodSpec = #{record.goodspec,jdbcType=VARCHAR},
+      goodInventory = #{record.goodinventory,jdbcType=INTEGER},
+      goodSalePrice = #{record.goodsaleprice,jdbcType=DOUBLE},
+      goodCost = #{record.goodcost,jdbcType=DOUBLE},
+      synchronization = #{record.synchronization,jdbcType=INTEGER},
+      goodDescribe = #{record.gooddescribe,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Goodmanagement" >
+    update goodmanagement
+    <set >
+      <if test="goodtypeid != null" >
+        goodTypeId = #{goodtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="goodimg != null" >
+        goodImg = #{goodimg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodname != null" >
+        goodName = #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodbarcode != null" >
+        goodBarcode = #{goodbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodspec != null" >
+        goodSpec = #{goodspec,jdbcType=VARCHAR},
+      </if>
+      <if test="goodinventory != null" >
+        goodInventory = #{goodinventory,jdbcType=INTEGER},
+      </if>
+      <if test="goodsaleprice != null" >
+        goodSalePrice = #{goodsaleprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodcost != null" >
+        goodCost = #{goodcost,jdbcType=DOUBLE},
+      </if>
+      <if test="synchronization != null" >
+        synchronization = #{synchronization,jdbcType=INTEGER},
+      </if>
+      <if test="gooddescribe != null" >
+        goodDescribe = #{gooddescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goodId = #{goodid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Goodmanagement" >
+    update goodmanagement
+    set goodTypeId = #{goodtypeid,jdbcType=INTEGER},
+      goodImg = #{goodimg,jdbcType=VARCHAR},
+      goodName = #{goodname,jdbcType=VARCHAR},
+      goodBarcode = #{goodbarcode,jdbcType=VARCHAR},
+      goodSpec = #{goodspec,jdbcType=VARCHAR},
+      goodInventory = #{goodinventory,jdbcType=INTEGER},
+      goodSalePrice = #{goodsaleprice,jdbcType=DOUBLE},
+      goodCost = #{goodcost,jdbcType=DOUBLE},
+      synchronization = #{synchronization,jdbcType=INTEGER},
+      goodDescribe = #{gooddescribe,jdbcType=VARCHAR}
+    where goodId = #{goodid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.ShoppingcartinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Shoppingcartinfo" >
+    <id column="shoppingCartId" property="shoppingcartid" jdbcType="INTEGER" />
+    <result column="goodName" property="goodname" jdbcType="VARCHAR" />
+    <result column="goodQuantuty" property="goodquantuty" jdbcType="INTEGER" />
+    <result column="subtotal" property="subtotal" jdbcType="DOUBLE" />
+    <result column="goodId" property="goodid" jdbcType="INTEGER" />
+    <result column="goodPrice" property="goodprice" jdbcType="DOUBLE" />
+    <result column="goodDiscount" property="gooddiscount" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shoppingCartId, goodName, goodQuantuty, subtotal, goodId, goodPrice, goodDiscount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.ShoppingcartinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shoppingcartinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shoppingcartinfo
+    where shoppingCartId = #{shoppingcartid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shoppingcartinfo
+    where shoppingCartId = #{shoppingcartid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ShoppingcartinfoExample" >
+    delete from shoppingcartinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Shoppingcartinfo" >
+    insert into shoppingcartinfo (shoppingCartId, goodName, goodQuantuty, 
+      subtotal, goodId, goodPrice, 
+      goodDiscount)
+    values (#{shoppingcartid,jdbcType=INTEGER}, #{goodname,jdbcType=VARCHAR}, #{goodquantuty,jdbcType=INTEGER}, 
+      #{subtotal,jdbcType=DOUBLE}, #{goodid,jdbcType=INTEGER}, #{goodprice,jdbcType=DOUBLE}, 
+      #{gooddiscount,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Shoppingcartinfo" >
+    insert into shoppingcartinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shoppingcartid != null" >
+        shoppingCartId,
+      </if>
+      <if test="goodname != null" >
+        goodName,
+      </if>
+      <if test="goodquantuty != null" >
+        goodQuantuty,
+      </if>
+      <if test="subtotal != null" >
+        subtotal,
+      </if>
+      <if test="goodid != null" >
+        goodId,
+      </if>
+      <if test="goodprice != null" >
+        goodPrice,
+      </if>
+      <if test="gooddiscount != null" >
+        goodDiscount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shoppingcartid != null" >
+        #{shoppingcartid,jdbcType=INTEGER},
+      </if>
+      <if test="goodname != null" >
+        #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodquantuty != null" >
+        #{goodquantuty,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null" >
+        #{subtotal,jdbcType=DOUBLE},
+      </if>
+      <if test="goodid != null" >
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="goodprice != null" >
+        #{goodprice,jdbcType=DOUBLE},
+      </if>
+      <if test="gooddiscount != null" >
+        #{gooddiscount,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ShoppingcartinfoExample" resultType="java.lang.Integer" >
+    select count(*) from shoppingcartinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shoppingcartinfo
+    <set >
+      <if test="record.shoppingcartid != null" >
+        shoppingCartId = #{record.shoppingcartid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodname != null" >
+        goodName = #{record.goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodquantuty != null" >
+        goodQuantuty = #{record.goodquantuty,jdbcType=INTEGER},
+      </if>
+      <if test="record.subtotal != null" >
+        subtotal = #{record.subtotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goodid != null" >
+        goodId = #{record.goodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodprice != null" >
+        goodPrice = #{record.goodprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.gooddiscount != null" >
+        goodDiscount = #{record.gooddiscount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shoppingcartinfo
+    set shoppingCartId = #{record.shoppingcartid,jdbcType=INTEGER},
+      goodName = #{record.goodname,jdbcType=VARCHAR},
+      goodQuantuty = #{record.goodquantuty,jdbcType=INTEGER},
+      subtotal = #{record.subtotal,jdbcType=DOUBLE},
+      goodId = #{record.goodid,jdbcType=INTEGER},
+      goodPrice = #{record.goodprice,jdbcType=DOUBLE},
+      goodDiscount = #{record.gooddiscount,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Shoppingcartinfo" >
+    update shoppingcartinfo
+    <set >
+      <if test="goodname != null" >
+        goodName = #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodquantuty != null" >
+        goodQuantuty = #{goodquantuty,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null" >
+        subtotal = #{subtotal,jdbcType=DOUBLE},
+      </if>
+      <if test="goodid != null" >
+        goodId = #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="goodprice != null" >
+        goodPrice = #{goodprice,jdbcType=DOUBLE},
+      </if>
+      <if test="gooddiscount != null" >
+        goodDiscount = #{gooddiscount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where shoppingCartId = #{shoppingcartid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Shoppingcartinfo" >
+    update shoppingcartinfo
+    set goodName = #{goodname,jdbcType=VARCHAR},
+      goodQuantuty = #{goodquantuty,jdbcType=INTEGER},
+      subtotal = #{subtotal,jdbcType=DOUBLE},
+      goodId = #{goodid,jdbcType=INTEGER},
+      goodPrice = #{goodprice,jdbcType=DOUBLE},
+      goodDiscount = #{gooddiscount,jdbcType=DOUBLE}
+    where shoppingCartId = #{shoppingcartid,jdbcType=INTEGER}
+  </update>
+</mapper>

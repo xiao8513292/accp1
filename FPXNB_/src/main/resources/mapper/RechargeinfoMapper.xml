@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.RechargeinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Rechargeinfo" >
+    <id column="rechargeInfoId" property="rechargeinfoid" jdbcType="INTEGER" />
+    <result column="DATE" property="date" jdbcType="DATE" />
+    <result column="weiXin" property="weixin" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="INTEGER" />
+    <result column="recharge" property="recharge" jdbcType="DOUBLE" />
+    <result column="presented" property="presented" jdbcType="DOUBLE" />
+    <result column="consume" property="consume" jdbcType="DOUBLE" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rechargeInfoId, DATE, weiXin, NAME, phone, recharge, presented, consume, balance, 
+    remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.RechargeinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rechargeinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rechargeinfo
+    where rechargeInfoId = #{rechargeinfoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rechargeinfo
+    where rechargeInfoId = #{rechargeinfoid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.RechargeinfoExample" >
+    delete from rechargeinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Rechargeinfo" >
+    insert into rechargeinfo (rechargeInfoId, DATE, weiXin, 
+      NAME, phone, recharge, 
+      presented, consume, balance, 
+      remark)
+    values (#{rechargeinfoid,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{weixin,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=INTEGER}, #{recharge,jdbcType=DOUBLE}, 
+      #{presented,jdbcType=DOUBLE}, #{consume,jdbcType=DOUBLE}, #{balance,jdbcType=DOUBLE}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Rechargeinfo" >
+    insert into rechargeinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rechargeinfoid != null" >
+        rechargeInfoId,
+      </if>
+      <if test="date != null" >
+        DATE,
+      </if>
+      <if test="weixin != null" >
+        weiXin,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="recharge != null" >
+        recharge,
+      </if>
+      <if test="presented != null" >
+        presented,
+      </if>
+      <if test="consume != null" >
+        consume,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rechargeinfoid != null" >
+        #{rechargeinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="recharge != null" >
+        #{recharge,jdbcType=DOUBLE},
+      </if>
+      <if test="presented != null" >
+        #{presented,jdbcType=DOUBLE},
+      </if>
+      <if test="consume != null" >
+        #{consume,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.RechargeinfoExample" resultType="java.lang.Integer" >
+    select count(*) from rechargeinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rechargeinfo
+    <set >
+      <if test="record.rechargeinfoid != null" >
+        rechargeInfoId = #{record.rechargeinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        DATE = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.weixin != null" >
+        weiXin = #{record.weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=INTEGER},
+      </if>
+      <if test="record.recharge != null" >
+        recharge = #{record.recharge,jdbcType=DOUBLE},
+      </if>
+      <if test="record.presented != null" >
+        presented = #{record.presented,jdbcType=DOUBLE},
+      </if>
+      <if test="record.consume != null" >
+        consume = #{record.consume,jdbcType=DOUBLE},
+      </if>
+      <if test="record.balance != null" >
+        balance = #{record.balance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rechargeinfo
+    set rechargeInfoId = #{record.rechargeinfoid,jdbcType=INTEGER},
+      DATE = #{record.date,jdbcType=DATE},
+      weiXin = #{record.weixin,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=INTEGER},
+      recharge = #{record.recharge,jdbcType=DOUBLE},
+      presented = #{record.presented,jdbcType=DOUBLE},
+      consume = #{record.consume,jdbcType=DOUBLE},
+      balance = #{record.balance,jdbcType=DOUBLE},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Rechargeinfo" >
+    update rechargeinfo
+    <set >
+      <if test="date != null" >
+        DATE = #{date,jdbcType=DATE},
+      </if>
+      <if test="weixin != null" >
+        weiXin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="recharge != null" >
+        recharge = #{recharge,jdbcType=DOUBLE},
+      </if>
+      <if test="presented != null" >
+        presented = #{presented,jdbcType=DOUBLE},
+      </if>
+      <if test="consume != null" >
+        consume = #{consume,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rechargeInfoId = #{rechargeinfoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Rechargeinfo" >
+    update rechargeinfo
+    set DATE = #{date,jdbcType=DATE},
+      weiXin = #{weixin,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=INTEGER},
+      recharge = #{recharge,jdbcType=DOUBLE},
+      presented = #{presented,jdbcType=DOUBLE},
+      consume = #{consume,jdbcType=DOUBLE},
+      balance = #{balance,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where rechargeInfoId = #{rechargeinfoid,jdbcType=INTEGER}
+  </update>
+</mapper>
