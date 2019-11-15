@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="update" method="post">
+		<input type="hidden" name="id" th:value="${stu.id}">
+		<input name="name" th:value="${stu.name}">
+		<input name="age" th:value="${stu.age}">
+		<input type="submit" value="保存">
+		<input type="button" value="返回" onclick="history.back()">
+	</form>
+</body>
+</html>
